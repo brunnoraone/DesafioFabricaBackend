@@ -10,8 +10,8 @@ class cnpjViewSet(ModelViewSet):
     serializer_class = CNPJSerializer
     
     def create(self, request):
-        cnpj = request.data.get('cnpj')
-        site = f'https://receitaws.com.br/v1/cnpj/{cnpj}'
+        cnpj = request.data.get('cnpj') #passar no body com o nome cnpj, numeros sem . e - 
+        site = f'https://receitaws.com.br/v1/cnpj/{cnpj}' #url da api de cnpj
         requisicao = requests.get(site)
         json = requisicao.json()
   
@@ -28,16 +28,16 @@ class cnpjViewSet(ModelViewSet):
             "nomeFantasia": nomeFantasia 
         }
         
-        # Save the Empresa instance
+        
         serial = CNPJSerializer(data=dados1)
         if serial.is_valid(): 
             empresa = serial.save()
         else:
             return Response(serial.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        # Use the saved Empresa instance's ID to create the Endereco instance
+       
         dadosEndereco= {
-            "cnpj": empresa.id,  # Reference the saved Empresa instance's ID
+            "cnpj": empresa.id,  
             "logradouro": logradouro,
             "numero": numero,
             "cep": cep 
