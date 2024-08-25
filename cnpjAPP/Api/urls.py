@@ -4,9 +4,9 @@ from .viewset import cnpjViewSet
 
 
 router = DefaultRouter()
-router.register(prefix="f1", viewset=cnpjViewSet)
+router.register(prefix="cnpj", viewset=cnpjViewSet)
 
 
 urlpatterns = [
-    path("api/", include(router.urls)),
+    path("", include(router.urls)),
 ]
